@@ -1,6 +1,11 @@
 package com.springboot.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "EcommerceProductCategory")
@@ -12,6 +17,12 @@ public class ProductCategory {
 
     @Column
     private String categoryName;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JsonBackReference
+    @JsonIgnore
+    @JoinColumn(name = "pc_id")
+    private Set<ProductSubCategory> subCategories = new HashSet<>();
 
     public int getPc_id() {
         return pc_id;
@@ -29,4 +40,11 @@ public class ProductCategory {
         this.categoryName = categoryName;
     }
 
+    public Set<ProductSubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(Set<ProductSubCategory> subCategories) {
+        this.subCategories = subCategories;
+    }
 }

@@ -2,6 +2,7 @@ package com.springboot.ecommerce.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -24,6 +25,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "pc_id")
+    @JsonIgnoreProperties({ "subCategories" })
     private ProductCategory productCategory;
 
     @ManyToOne

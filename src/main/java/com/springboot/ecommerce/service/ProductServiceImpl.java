@@ -1,6 +1,7 @@
 package com.springboot.ecommerce.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.springboot.ecommerce.model.Product;
 import com.springboot.ecommerce.repository.ProductDao;
@@ -33,7 +34,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> getProductList() {
-        return productDao.getProducts();
+        return productDao.getProducts().stream().distinct().collect(Collectors.toList());
     }
 
     @Override

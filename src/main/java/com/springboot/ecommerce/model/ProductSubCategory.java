@@ -17,9 +17,9 @@ public class ProductSubCategory {
     @Column
     private String subCategoryName;
 
-    @JsonManagedReference
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     @JoinColumn(name = "pc_id")
     private ProductCategory productCategory;
 
