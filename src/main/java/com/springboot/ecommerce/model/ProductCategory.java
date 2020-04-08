@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "EcommerceProductCategory")
+@Table(name = "ProductCategory")
 public class ProductCategory {
 
     @Id
@@ -23,6 +22,7 @@ public class ProductCategory {
     @JsonIgnore
     @JoinColumn(name = "pc_id")
     private Set<ProductSubCategory> subCategories = new HashSet<>();
+
 
     public int getPc_id() {
         return pc_id;
@@ -47,4 +47,5 @@ public class ProductCategory {
     public void setSubCategories(Set<ProductSubCategory> subCategories) {
         this.subCategories = subCategories;
     }
+
 }

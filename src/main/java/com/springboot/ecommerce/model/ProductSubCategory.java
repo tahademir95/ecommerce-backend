@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "EcommerceProductSubCategory")
+@Table(name = "ProductSubCategory")
 public class ProductSubCategory {
 
     @Id
@@ -17,8 +19,13 @@ public class ProductSubCategory {
     @Column
     private String subCategoryName;
 
+    @OneToMany(fetch = FetchType.EAGER)     //one subcategory can have multiple subcategory features
+    @JsonBackReference
+    @JsonIgnore
+    @JoinColumn(name = "psc_id")
+    private Set<SubCategoryFeature> subCategoryFeatures = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)     //multiple subcategories can have one category
     @JsonBackReference
     @JoinColumn(name = "pc_id")
     private ProductCategory productCategory;
@@ -45,5 +52,13 @@ public class ProductSubCategory {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public void setSubCategoryFeatures(Set<SubCategoryFeature> subCategoryFeatures) {
+        this.subCategoryFeatures = subCategoryFeatures;
+    }
+
+    public Set<SubCategoryFeature> getSubCategoryFeatures() {
+        return subCategoryFeatures;
     }
 }

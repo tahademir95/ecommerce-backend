@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,7 +35,7 @@ public class ProductSubCategoryServiceImpl implements ProductSubCategoryService{
 
     @Override
     public List<ProductSubCategory> getSubCategoryList() {
-        return subCategoryDao.getSubCategories();
+        return subCategoryDao.getSubCategories().stream().distinct().collect(Collectors.toList());
     }
 
     @Override

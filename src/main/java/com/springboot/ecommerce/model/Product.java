@@ -2,11 +2,10 @@ package com.springboot.ecommerce.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name="EcommerceProduct")
+@Table(name="Product")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
@@ -17,8 +16,8 @@ public class Product {
     @Column(name = "p_name")
     private String productName;
 
-    @Column(name = "p_desc")
-    private String productDescription;
+    @Column(name = "p_brand")
+    private String brandOfProduct;
 
     @Column(name = "p_fee")
     private int productFee;
@@ -48,12 +47,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getBrandOfProduct() {
+        return brandOfProduct;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setBrandOfProduct(String brandOfProduct) {
+        this.brandOfProduct = brandOfProduct;
     }
 
     public int getProductFee() {
