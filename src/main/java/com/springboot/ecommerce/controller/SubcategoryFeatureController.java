@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/subcategory-feature-api")
-public class ProductFeatureController {
+public class SubcategoryFeatureController {
 
     @Autowired
     SubCategoryFeatureService featureService;
