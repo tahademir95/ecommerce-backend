@@ -46,19 +46,19 @@ public class ProductSubCategory {
         this.subCategoryName = subCategoryName;
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public Set<SubCategoryFeature> getSubCategoryFeatures() {
+        return subCategoryFeatures;
     }
 
     public void setSubCategoryFeatures(Set<SubCategoryFeature> subCategoryFeatures) {
         this.subCategoryFeatures = subCategoryFeatures;
     }
 
-    public Set<SubCategoryFeature> getSubCategoryFeatures() {
-        return subCategoryFeatures;
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
 }
