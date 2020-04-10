@@ -45,8 +45,6 @@ public class ProductDaoImpl implements  ProductDao{
     @Override
     public List<Product> getProducts() {
         Session session = sessionFactory.getCurrentSession();
-        @SuppressWarnings("unchecked")
-        List<Product> productList = session.createCriteria(Product.class).list();
-        return productList;
+        return session.createQuery("from com.springboot.ecommerce.model.Product").list();
     }
 }
