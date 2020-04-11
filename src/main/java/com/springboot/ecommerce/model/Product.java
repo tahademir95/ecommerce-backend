@@ -1,8 +1,12 @@
 package com.springboot.ecommerce.model;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name="Product")
@@ -28,8 +32,17 @@ public class Product {
     private ProductCategory productCategory;
 
     @ManyToOne
+    @JsonIgnoreProperties(value = { "subCategoryFeatures"})
     @JoinColumn(name = "psc_id")
     private ProductSubCategory subCategory;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @JsonManagedReference
+    @JoinTable(name = "product_feature", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "p_id"),
+               inverseJoinColumns = @JoinColumn(name = "product_feature_detail_temp_id", referencedColumnName = "pfd_id"))
+    private Set<ProductFeatureDetail> featureDetails;
 
     public int getP_id() {
         return p_id;
@@ -77,5 +90,13 @@ public class Product {
 
     public void setSubCategory(ProductSubCategory subCategory) {
         this.subCategory = subCategory;
+    }
+
+    public Set<ProductFeatureDetail> getFeatureDetails() {
+        return featureDetails;
+    }
+
+    public void setFeatureDetails(Set<ProductFeatureDetail> featureDetails) {
+        this.featureDetails = featureDetails;
     }
 }

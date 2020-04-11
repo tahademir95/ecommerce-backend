@@ -1,7 +1,7 @@
 package com.springboot.ecommerce.controller;
 
 import com.springboot.ecommerce.model.ProductCategory;
-import com.springboot.ecommerce.service.ProductCategoryServiceImpl;
+import com.springboot.ecommerce.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductCategoryController {
 
     @Autowired
-    ProductCategoryServiceImpl categoryService;
+    ProductCategoryService categoryService;
 
     @PostMapping(value = "/create-product-category", headers = "Accept=application/json")
     public ResponseEntity<Void> createNewProduct(@RequestBody ProductCategory productCategory, UriComponentsBuilder ucBuilder) {
