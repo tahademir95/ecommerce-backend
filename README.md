@@ -13,8 +13,8 @@ Now, the capability of the application is the CRUD operation of product, product
 
 ## Table Of Contents
 
-### [1. API’s and their definitions](https://github.com/tahademir95/ecommerce-backend/new/master?readme=1#1-apis-and-their-definitions-1)
-### [2. How to save data into the database from the beginning?](https://github.com/tahademir95/ecommerce-backend/new/master?readme=1#2-how-to-save-data-into-the-database-from-the-beginning-1)
+### [1. API’s and their definitions](https://github.com/tahademir95/ecommerce-backend#1-apis-and-their-definitions-1)
+### [2. How to save data into the database from the beginning?](https://github.com/tahademir95/ecommerce-backend#2-how-to-save-data-into-the-database-from-the-beginning-1)
 
 ## 1. API’s and their definitions
 ### A. Product-Api
