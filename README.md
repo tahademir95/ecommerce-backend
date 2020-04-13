@@ -308,6 +308,8 @@ To see the subcategory list and learn the ids of them. Also when added subcatego
        ]
     }
     ```
+    
+    You should realize that **subcategories** field enlarge after adding information to product subcategory.
 
 ### E. **POST** ``` /subcategory-feature-api/create-subcategory-feature ```
 
@@ -354,8 +356,10 @@ To see the subcategory feature list and learn the {id}s of them. Also when added
      }
    ]
    ```
+   
+   You should realize that **subCategoryFeatures** field enlarge after adding information to subcategory feature.
 
-### G. **POST** ``` /subcategory-feature-api/get-subcategory-feature-list ```
+### G. **POST** ``` /product-feature-detail-api/create-product-feature-detail ```
 
 The features of the products are added under the features of the subcategory. That’s to say, if we follow our case, we have added phone’s front camera to subcategory. Now, specify the feature of front cameras such as 8MP or 12MP… To do this, we must specify the subcategory feature id.
 
@@ -397,6 +401,8 @@ To see the product feature detail list and {id}s of product feature details.
       }
    ]
    ```
+   
+   You should realize that **productFeatureDetails** field enlarge after adding information to product feature detail.
    
 ### I. **POST** ``` /product-api/create-product ```
 
