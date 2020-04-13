@@ -59,4 +59,9 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return productService.getProductList();
     }
+
+    @GetMapping(value="/get-product-list-in-the-same-subcategory/{psc_id}", headers="Accept=application/json")
+    public List<Product> getAllProductsInTheSameSubCategory(@PathVariable("psc_id") int psc_id) {
+        return (List<Product>) productService.getProductListInTheSameSubCategory(psc_id);
+    }
 }

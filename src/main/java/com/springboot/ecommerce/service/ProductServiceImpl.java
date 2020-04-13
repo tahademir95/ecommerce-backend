@@ -16,6 +16,7 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     ProductDao productDao;
 
+
     @Override
     public int createProduct(Product product) {
         return productDao.addProduct(product);
@@ -40,5 +41,10 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product findProductById(int id) {
         return productDao.findProductById(id);
+    }
+
+    @Override
+    public List<Product> getProductListInTheSameSubCategory(int psc_id) {
+        return productDao.getProductsInTheSameSubCategory(psc_id);
     }
 }

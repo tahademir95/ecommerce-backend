@@ -19,6 +19,10 @@ Now, the capability of the application is the CRUD operation of product, product
 ## 1. API’s and their definitions
 ### A. Product-Api
 
+* **GET** ``` /product-api/get-product-list-in-the-same-subcategory/{psc_id} ```
+
+   Gets all products that are in the same subcategory list.
+
 *  **GET** ``` /product-api/product/{id} ```
 
    Gets the specified product information 

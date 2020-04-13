@@ -10,4 +10,5 @@ public interface ProductDao {
     public int updateProduct(Product product);
     public Product findProductById(int id);
     public List<Product> getProducts();
+    public List<Product> getProductsInTheSameSubCategory(int psc_id);
 }

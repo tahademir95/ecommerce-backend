@@ -1,8 +1,12 @@
 package com.springboot.ecommerce.repository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.springboot.ecommerce.model.Product;
+import com.springboot.ecommerce.model.ProductSubCategory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +50,12 @@ public class ProductDaoImpl implements  ProductDao{
     public List<Product> getProducts() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from com.springboot.ecommerce.model.Product").list();
+    }
+
+    @Override
+    public List<Product> getProductsInTheSameSubCategory(int psc_id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.createQuery("select p from com.springboot.ecommerce.model.Product p  inner join com.springboot.ecommerce.model.ProductSubCategory s on p.subCategory.psc_id=s.psc_id where s.psc_id in :psc_id_temp").setParameter("psc_id_temp", psc_id).list();
     }
 }

@@ -10,4 +10,5 @@ public interface ProductService {
     public Product editProduct(Product product);
     public List<Product> getProductList();
     public Product findProductById(int id);
+    public List<Product> getProductListInTheSameSubCategory(int psc_id);
 }
