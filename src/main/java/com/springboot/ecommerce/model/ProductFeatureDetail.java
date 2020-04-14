@@ -10,7 +10,7 @@ import java.util.*;
 public class ProductFeatureDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pfd_id;
 
     @Column

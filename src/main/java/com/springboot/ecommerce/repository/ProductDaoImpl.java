@@ -55,7 +55,12 @@ public class ProductDaoImpl implements  ProductDao{
     @Override
     public List<Product> getProductsInTheSameSubCategory(int psc_id) {
         Session session = sessionFactory.getCurrentSession();
-
         return session.createQuery("select p from com.springboot.ecommerce.model.Product p  inner join com.springboot.ecommerce.model.ProductSubCategory s on p.subCategory.psc_id=s.psc_id where s.psc_id in :psc_id_temp").setParameter("psc_id_temp", psc_id).list();
+    }
+
+    @Override
+    public List<Product> getProductsInTheSameCategory(int pc_id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select p from com.springboot.ecommerce.model.Product p  inner join com.springboot.ecommerce.model.ProductCategory c on p.productCategory.pc_id=c.pc_id where c.pc_id in :pc_id_temp").setParameter("pc_id_temp", pc_id).list();
     }
 }

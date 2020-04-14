@@ -47,4 +47,9 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getProductListInTheSameSubCategory(int psc_id) {
         return productDao.getProductsInTheSameSubCategory(psc_id);
     }
+
+    @Override
+    public List<Product> getAllProductsUnderTheSameCategory(int pc_id) {
+        return productDao.getProductsInTheSameCategory(pc_id);
+    }
 }

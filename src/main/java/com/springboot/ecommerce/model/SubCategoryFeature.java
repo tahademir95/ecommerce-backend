@@ -11,7 +11,7 @@ import java.util.Set;
 public class SubCategoryFeature {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int scf_id;
 
     @Column

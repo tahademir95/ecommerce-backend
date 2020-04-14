@@ -19,13 +19,21 @@ Now, the capability of the application is the CRUD operation of product, product
 ## 1. API’s and their definitions
 ### A. Product-Api
 
+* **GET** ``` /product-api/product/{id} ```
+
+   Gets the specified product information 
+   
+*  **GET**  ``` /product-api/get-product-list ```
+ 
+     Gets the products and information of them in a list
+
 * **GET** ``` /product-api/get-product-list-in-the-same-subcategory/{psc_id} ```
 
    Gets all products that are in the same subcategory list.
+   
+* **GET** ``` /product-api/get-product-list-in-the-same-category/{pc_id} ```
 
-*  **GET** ``` /product-api/product/{id} ```
-
-   Gets the specified product information 
+   Gets all products that are in the same category.
    
 *  **Delete** ``` /product-api/delete-product/{id} ```
 
@@ -56,10 +64,6 @@ Now, the capability of the application is the CRUD operation of product, product
       ]
     }   
     ```
-    
- *  **GET**  ``` /product-api/get-product-list ```
- 
-     Gets the products and information of them in a list
      
   *  **POST**  ``` /product-api/create-product ```
   
@@ -90,6 +94,10 @@ Now, the capability of the application is the CRUD operation of product, product
    
       Gets the specified product category information 
       
+  * **GET** ``` /product-category-api/get-product-category-list ```
+    
+       Gets the product categories and information of them in a list
+      
   * **DELETE** ``` /product-category-api/delete-product-category/{id} ```
   
      Deletes the specified product category.
@@ -104,10 +112,6 @@ Now, the capability of the application is the CRUD operation of product, product
        "categoryName": "update_name_of_the_category"
     }
     ```
-    
-* **GET** ``` /product-category-api/get-product-category-list ```
-
-   Gets the product categories and information of them in a list
    
 * **POST** ``` product-category-api/create-product-category ```
 
@@ -123,6 +127,10 @@ Now, the capability of the application is the CRUD operation of product, product
 * **GET** ``` /product-feature-detail-api/product-feature-detail/{id} ```
 
    Gets the specified product feature detail information
+   
+* **GET** ``` /product-feature-detail-api/get-product-feature-detail-list ```  
+ 
+    Gets the product feature detail list and information of them.
    
 * **DELETE** ``` /product-feature-detail-api/delete-product-feature-detail/{id} ```
 
@@ -141,9 +149,6 @@ Now, the capability of the application is the CRUD operation of product, product
       }
    }
    ```
- * **GET** ``` /product-feature-detail-api/get-product-feature-detail-list ```  
- 
-    Gets the product feature detail list and information of them.
     
  * **POST** ``` /product-feature-detail-api/create-product-feature-detail ``` 
  
@@ -163,6 +168,10 @@ Now, the capability of the application is the CRUD operation of product, product
 * **GET** ``` /product-subcategory-api/product-subcategory/{id} ```
 
    Gets the specified product subcategory information
+   
+* **GET** ``` /product-subcategory-api/get-product-subcategory-list ```
+   
+   Gets the product subcategory list and information of them
    
 * **DELETE** ``` /product-subcategory-api/delete-product-subcategory/{id} ```
 
@@ -186,10 +195,6 @@ Now, the capability of the application is the CRUD operation of product, product
      ]
   }
   ```
-  
-* **GET** ``` /product-subcategory-api/get-product-subcategory-list ```
-   
-   Gets the product subcategory list and information of them
    
 * **POST** ``` /product-subcategory-api/create-product-subcategory ```  
 
@@ -209,6 +214,10 @@ Now, the capability of the application is the CRUD operation of product, product
 
    Get the specified subcategory feature information
    
+* **GET** ``` /subcategory-feature-api/get-subcategory-feature-list ```
+  
+     Gets the subcategory feature list and information of them
+   
 * **DELETE** ``` /subcategory-feature-api/delete-subcategory-feature/{id} ```
 
    Deletes the specified subcategory feature.
@@ -226,10 +235,6 @@ Now, the capability of the application is the CRUD operation of product, product
      }
   }
   ```
-  
-* **GET** ``` /subcategory-feature-api/get-subcategory-feature-list ```
-  
-     Gets the subcategory feature list and information of them
      
 * **POST** ``` /subcategory-feature-api/create-subcategory-feature ```
  

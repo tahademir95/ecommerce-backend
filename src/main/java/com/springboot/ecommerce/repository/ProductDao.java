@@ -11,4 +11,5 @@ public interface ProductDao {
     public Product findProductById(int id);
     public List<Product> getProducts();
     public List<Product> getProductsInTheSameSubCategory(int psc_id);
+    public List<Product> getProductsInTheSameCategory(int pc_id);
 }

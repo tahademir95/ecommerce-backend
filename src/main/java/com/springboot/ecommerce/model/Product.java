@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int p_id;
 
     @Column(name = "p_name")

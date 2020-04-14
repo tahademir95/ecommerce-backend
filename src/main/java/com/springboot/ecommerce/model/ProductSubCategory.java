@@ -13,7 +13,7 @@ import java.util.Set;
 public class ProductSubCategory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int psc_id;
 
     @Column
