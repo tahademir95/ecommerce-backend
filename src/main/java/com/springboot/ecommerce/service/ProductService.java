@@ -11,5 +11,6 @@ public interface ProductService {
     public List<Product> getProductList();
     public Product findProductById(int id);
     public List<Product> getProductListInTheSameSubCategory(int psc_id);
+    public List<Product> getProductListInTheSameSubCategory(int psc_id, Integer minCost, Integer maxCost);
     public List<Product> getAllProductsUnderTheSameCategory(int pc_id);
 }
