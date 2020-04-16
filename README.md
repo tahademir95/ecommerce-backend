@@ -32,7 +32,7 @@ Now, the capability of the application is the CRUD operation of product, product
    * Gets all products that are in the same subcategory list.
    * User can get all products of any subcategory in the price range that he/she has set. If minimum or maximum cost is not set, then minimum cost will be zero and maximum cost will be 99999. If both of them are not set, then user will get all products in the same subcategory. Syntax is:
    
-      ``` /get-product-list-in-the-same-subcategory/{psc_id}?minCost{minCost}=&maxCost={maxCost} ```
+      ``` /get-product-list-in-the-same-subcategory/{psc_id}?minCost={minCost}&maxCost={maxCost} ```
    
 * **GET** ``` /product-api/get-product-list-in-the-same-category/{pc_id} ```
 
