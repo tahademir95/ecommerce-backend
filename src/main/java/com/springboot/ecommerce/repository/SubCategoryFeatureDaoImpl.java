@@ -43,6 +43,7 @@ public class SubCategoryFeatureDaoImpl implements SubCategoryFeatureDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<SubCategoryFeature> getSubCategoryFeatures() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from com.springboot.ecommerce.model.SubCategoryFeature").list();

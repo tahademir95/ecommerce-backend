@@ -1,13 +1,16 @@
 package com.springboot.ecommerce.controller;
 
-import java.util.List;
-
 import com.springboot.ecommerce.model.Product;
 import com.springboot.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 
 @RestController
@@ -58,11 +61,17 @@ public class ProductController {
     }
 
     @GetMapping(value="/get-product-list-in-the-same-subcategory/{psc_id}", headers="Accept=application/json")
-    public List<Product> getAllProductsInTheSameSubCategory(@PathVariable("psc_id") int psc_id, @RequestParam(value = "minCost", required = false, defaultValue = "0") Integer minCost, @RequestParam(value = "maxCost", required = false, defaultValue = "99999") Integer maxCost) {
-        if (true){
+    public List<Product> getAllProductsInTheSameSubCategory(@PathVariable("psc_id") int psc_id,
+                                                            @RequestParam(value = "minCost", required = false, defaultValue = "0") Integer minCost,
+                                                            @RequestParam(value = "maxCost", required = false, defaultValue = "99999") Integer maxCost,
+                                                            @RequestParam(value = "brandName", required = false) List<String> brandNameList) {
+
+        if (((minCost != null && maxCost != null) &&  brandNameList != null )){
+            return (List<Product>) productService.getProductListInTheSameSubCategory(psc_id, minCost, maxCost, brandNameList);
+        }
+        else {
             return (List<Product>) productService.getProductListInTheSameSubCategory(psc_id, minCost, maxCost);
-        }else
-            return (List<Product>) productService.getProductListInTheSameSubCategory(psc_id);
+        }
     }
 
     @GetMapping(value="/get-product-list-in-the-same-category/{pc_id}", headers="Accept=application/json")

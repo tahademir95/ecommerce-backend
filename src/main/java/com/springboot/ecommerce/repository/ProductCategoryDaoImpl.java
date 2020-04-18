@@ -43,6 +43,7 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductCategory> getCategories() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from com.springboot.ecommerce.model.ProductCategory").list();

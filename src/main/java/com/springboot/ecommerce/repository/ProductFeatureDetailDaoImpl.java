@@ -43,6 +43,7 @@ public class ProductFeatureDetailDaoImpl implements ProductFeatureDetailDao{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<ProductFeatureDetail> getProductFeatureDetails() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from com.springboot.ecommerce.model.ProductFeatureDetail").list();
