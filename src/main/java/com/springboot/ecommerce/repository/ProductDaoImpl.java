@@ -51,6 +51,29 @@ public class ProductDaoImpl implements  ProductDao{
 
     @Override
     @SuppressWarnings("unchecked")
+    public List<Product> getBrandNamesAndCountOfProductsInTheSameSubCategory(int psc_id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select new com.springboot.ecommerce.pojo.BrandAndCountOfProduct(p.brandOfProduct, count(p.p_id)) " +
+                                      "from com.springboot.ecommerce.model.Product p  " +
+                                      "where p.subCategory.psc_id in :psc_id_temp " +
+                                      "group by p.brandOfProduct")
+                .setParameter("psc_id_temp", psc_id).getResultList();
+
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Product> getBrandNamesAndCountOfProductsInTheSameCategory(int pc_id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select new com.springboot.ecommerce.pojo.BrandAndCountOfProduct(p.brandOfProduct, count(p.p_id)) " +
+                "from com.springboot.ecommerce.model.Product p  " +
+                "where p.productCategory.pc_id in :pc_id_temp " +
+                "group by p.brandOfProduct")
+                .setParameter("pc_id_temp", pc_id).getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<Product> getProductsInTheSameSubCategory(int psc_id) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select p from com.springboot.ecommerce.model.Product p  " +

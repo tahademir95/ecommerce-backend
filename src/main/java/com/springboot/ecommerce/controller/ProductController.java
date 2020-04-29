@@ -313,4 +313,42 @@ public class ProductController {
     public List<Product> getAllProductsUnderTheSameCategory(@Parameter(description = "ID of the product category") @PathVariable("pc_id") int pc_id) {
         return (List<Product>) productService.getAllProductsUnderTheSameCategory(pc_id);
     }
+
+    @Operation(summary = "Gets all brand names and count of the brands' products under the same subcategory", description = "Lists all brand names and count of the brands' products under the same subcategory", tags = { "Product" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All Brands And Count Of Brands' Products Under The Same Subcategory", content = @Content(schema = @Schema(example = "[\n" +
+                    "    {\n" +
+                    "        \"brand\": \"string\",\n" +
+                    "        \"countOfProduct\": long\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "        \"brand\": \"string\",\n" +
+                    "        \"countOfProduct\": long\n" +
+                    "    }\n" +
+                    "]"))
+            )
+    })
+    @GetMapping(value="/get-brands-and-count-of-brands-product-in-the-same-subcategory/{psc_id}", headers="Accept=application/json")
+    public List<Product> getBrandNamesOfProductsUnderTheSameSubCategory(@Parameter(description = "ID of the product subcategory") @PathVariable("psc_id") int psc_id) {
+        return (List<Product>) productService.getBrandNameAndCountOfProductListInTheSameSubcategory(psc_id);
+    }
+
+    @Operation(summary = "Gets all brand names and count of the brands' products under the same category", description = "Lists all brand names and count of the brands' products under the same category", tags = { "Product" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All Brands And Count Of Brands' Products Under The Same Category", content = @Content(schema = @Schema(example = "[\n" +
+                    "    {\n" +
+                    "        \"brand\": \"string\",\n" +
+                    "        \"countOfProduct\": long\n" +
+                    "    },\n" +
+                    "    {\n" +
+                    "        \"brand\": \"string\",\n" +
+                    "        \"countOfProduct\": long\n" +
+                    "    }\n" +
+                    "]"))
+            )
+    })
+    @GetMapping(value="/get-brands-and-count-of-brands-product-in-the-same-category/{pc_id}", headers="Accept=application/json")
+    public List<Product> getBrandNamesOfProductsUnderTheSameCategory(@Parameter(description = "ID of the product category") @PathVariable("pc_id") int pc_id) {
+        return (List<Product>) productService.getBrandNameAndCountOfProductListInTheSameCategory(pc_id);
+    }
 }

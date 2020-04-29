@@ -49,6 +49,16 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public List<Product> getBrandNameAndCountOfProductListInTheSameSubcategory(int psc_id) {
+        return productDao.getBrandNamesAndCountOfProductsInTheSameSubCategory(psc_id);
+    }
+
+    @Override
+    public List<Product> getBrandNameAndCountOfProductListInTheSameCategory(int pc_id) {
+        return productDao.getBrandNamesAndCountOfProductsInTheSameCategory(pc_id);
+    }
+
+    @Override
     public List<Product> getProductListInTheSameSubCategory(int psc_id, Integer minCost, Integer maxCost, List<String> brandNameList) {
         return productDao.getProductsInTheSameSubCategory(psc_id, minCost, maxCost, brandNameList);
     }

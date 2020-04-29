@@ -48,6 +48,14 @@ Swagger is also connected. When project is started, go to this ``` http://localh
 
    Gets all products that are in the same category.
    
+* **GET** ``` /get-brands-and-count-of-brands-product-in-the-same-subcategory/{psc_id} ```
+
+   Gets all brand names and count of the brands' products under the same subcategory
+   
+* **GET** ``` /get-brands-and-count-of-brands-product-in-the-same-category/{pc_id} ```
+
+   Gets all brand names and count of the brands' products under the same category
+   
 *  **Delete** ``` /product-api/delete-product/{id} ```
 
    Deletes the specified product.
