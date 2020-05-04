@@ -66,9 +66,9 @@ public class ProductDaoImpl implements  ProductDao{
     public List<Product> getBrandNamesAndCountOfProductsInTheSameCategory(int pc_id) {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select new com.springboot.ecommerce.pojo.BrandAndCountOfProduct(p.brandOfProduct, count(p.p_id)) " +
-                "from com.springboot.ecommerce.model.Product p  " +
-                "where p.productCategory.pc_id in :pc_id_temp " +
-                "group by p.brandOfProduct")
+                                      "from com.springboot.ecommerce.model.Product p  " +
+                                      "where p.productCategory.pc_id in :pc_id_temp " +
+                                      "group by p.brandOfProduct")
                 .setParameter("pc_id_temp", pc_id).getResultList();
     }
 
@@ -127,5 +127,4 @@ public class ProductDaoImpl implements  ProductDao{
                                       "where c.pc_id in :pc_id_temp")
                 .setParameter("pc_id_temp", pc_id).list();
     }
-
 }
