@@ -4,7 +4,7 @@ This is the web application for e-commerce that will have a super user side, pro
 
 Now, the capability of the application is the CRUD operation of product, product category, product subcategory, subcategory feature and product feature detail that are explained in detail below.
 
-Swagger is also connected. When project is started, go to this ``` http://localhost:8080/swagger-ui/ ``` url to see E-Commerce Application API. Swagger UI page is authenticated. 
+Swagger is also connected. When project is started, go to this ``` http://localhost:8080/swagger-ui/ ``` url to see E-Commerce Application API. Swagger UI page is authenticated with JDBC authentication. Only the user having auth role in db can access to swagger ui page. Passwords of the users are stored as hashed one.
 
 ## Technologies that I have been using;
 -	Spring Boot
