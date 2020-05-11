@@ -4,7 +4,7 @@ This is the web application for e-commerce that will have a super user side, pro
 
 Now, the capability of the application is the CRUD operation of product, product category, product subcategory, subcategory feature and product feature detail that are explained in detail below.
 
-Swagger is also connected. When project is started, go to this ``` http://localhost:8080/swagger-ui/ ``` url to see E-Commerce Application API. Swagger UI page is authenticated with JDBC authentication. Only the user having auth role in db can access to swagger ui page. Passwords of the users are stored as hashed one.
+Swagger is also connected. When project is started, go to this ``` http://localhost:8080/swagger-ui/ ``` url to see E-Commerce Application API. Swagger UI page is authenticated with JDBC authentication. At first to access swagger ui, the admin should insert a user with username and password -which must be saved as hashed one of the original password for the security- to users table, also insert authority with authority name "auth" and the username that is authenticated to authorities table. Then, any user having auth role in db can access Swagger UI page with his/her username and password.
 
 ## Technologies that I have been using;
 -	Spring Boot
@@ -22,46 +22,46 @@ Swagger is also connected. When project is started, go to this ``` http://localh
 ## 1. API’s and their definitions
 ### A. Product-Api
 
-* **GET** ``` /product-api/product/{id} ```
+* **GET** ``` /product/product/{id} ```
 
    Gets the specified product information 
    
-*  **GET**  ``` /product-api/get-product-list ```
+*  **GET**  ``` /product/products ```
  
      Gets the products and information of them in a list
 
-* **GET** ``` /product-api/get-product-list-in-the-same-subcategory/{psc_id} ```
+* **GET** ``` /product/products-subcategory/{psc_id} ```
 
    * Gets all products that are in the same subcategory list.
    * User can get all products of any subcategory in the price range that he/she has set. If minimum or maximum cost is not set, then minimum cost will be zero and maximum cost will be 99999. If both of them are not set, then user will get all products in the same subcategory. Syntax is:
    
-      ``` /product-api/get-product-list-in-the-same-subcategory/{psc_id}?minCost={minCost}&maxCost={maxCost} ```
+      ``` /product/products-subcategory/{psc_id}?minCost={minCost}&maxCost={maxCost} ```
    
    * User can get all products of brands that he/she determined in any subcategories
    
-      ``` /product-api/get-product-list-in-the-same-subcategory/{psc_id}?brandName={brand_name} ```
+      ``` /product/products-subcategory/{psc_id}?brandName={brand_name} ```
       
    * User can get all products of brands and products in the price range in the same subcategory which have been determined by the user. If none of these are specified, then user will get all products in the specified subcategory. If some of these are specified, then user will get the products that are related to what he/she has specified.(User is able to specify more than one brand name)
    
-      ``` /product-api/get-product-list-in-the-same-subcategory/{psc_id}?minCost={minCost}&maxCost={maxCost}&brandName={brand_name}&brandName={brand_name} ```
+      ``` /product/products-subcategory/{psc_id}?minCost={minCost}&maxCost={maxCost}&brandName={brand_name}&brandName={brand_name} ```
 
-* **GET** ``` /product-api/get-product-list-in-the-same-category/{pc_id} ```
+* **GET** ``` /product/products-category/{pc_id} ```
 
    Gets all products that are in the same category.
    
-* **GET** ``` /get-brands-and-count-of-brands-product-in-the-same-subcategory/{psc_id} ```
+* **GET** ``` /product/brands-and-count-subcategory/{psc_id} ```
 
    Gets all brand names and count of the brands' products under the same subcategory
    
-* **GET** ``` /get-brands-and-count-of-brands-product-in-the-same-category/{pc_id} ```
+* **GET** ``` /product/brands-and-count-category/{pc_id} ```
 
    Gets all brand names and count of the brands' products under the same category
    
-*  **Delete** ``` /product-api/delete-product/{id} ```
+*  **Delete** ``` /product/product/{id} ```
 
    Deletes the specified product.
    
-*  **Put** ``` /product-api/update-product ```
+*  **Put** ``` /product/product/ ```
    Updates product. Syntax is below:
    
    ```JS
@@ -87,7 +87,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
     }   
     ```
      
-  *  **POST**  ``` /product-api/create-product ```
+  *  **POST**  ``` /product/product ```
   
      Creates new product. Syntax is below:
    
@@ -112,19 +112,19 @@ Swagger is also connected. When project is started, go to this ``` http://localh
    
    ### B. Product-Category-Api
    
-  * **GET** ``` /product-category-api/product-category/{id} ```
+  * **GET** ``` /product-category/category/{id} ```
    
       Gets the specified product category information 
       
-  * **GET** ``` /product-category-api/get-product-category-list ```
+  * **GET** ``` /product-category/categories ```
     
        Gets the product categories and information of them in a list
       
-  * **DELETE** ``` /product-category-api/delete-product-category/{id} ```
+  * **DELETE** ``` /product-category/category/{id} ```
   
      Deletes the specified product category.
      
- * **PUT** ``` /product-category-api/update-product-category ```
+ * **PUT** ``` /product-category/category/```
  
     Updates product category. Syntax is below:
     
@@ -135,7 +135,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
     }
     ```
    
-* **POST** ``` product-category-api/create-product-category ```
+* **POST** ``` product-category/category ```
 
    Creates new product category. Syntax is below:
    
@@ -146,19 +146,19 @@ Swagger is also connected. When project is started, go to this ``` http://localh
    ```
 ### C. Product-Feature-Detail-Api
 
-* **GET** ``` /product-feature-detail-api/product-feature-detail/{id} ```
+* **GET** ``` /product-feature-detail/detail/{id} ```
 
    Gets the specified product feature detail information
    
-* **GET** ``` /product-feature-detail-api/get-product-feature-detail-list ```  
+* **GET** ``` /product-feature-detail/details ```  
  
     Gets the product feature detail list and information of them.
    
-* **DELETE** ``` /product-feature-detail-api/delete-product-feature-detail/{id} ```
+* **DELETE** ``` /product-feature-detail/detail/{id} ```
 
    Deletes the specified product feature detail.
    
-* **PUT** ``` /product-feature-detail-api/update-product-feature-detail ```
+* **PUT** ``` /product-feature-detail/detail/ ```
 
    Updates product category. Syntax is below:
    
@@ -172,7 +172,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
    }
    ```
     
- * **POST** ``` /product-feature-detail-api/create-product-feature-detail ``` 
+ * **POST** ``` /product-feature-detail/detail ``` 
  
     Creates new product feature detail. Syntax is below:
     
@@ -187,19 +187,19 @@ Swagger is also connected. When project is started, go to this ``` http://localh
 
  ### D. Product-SubCategory-Api  
    
-* **GET** ``` /product-subcategory-api/product-subcategory/{id} ```
+* **GET** ``` /product-subcategory/subcategory/{id} ```
 
    Gets the specified product subcategory information
    
-* **GET** ``` /product-subcategory-api/get-product-subcategory-list ```
+* **GET** ``` /product-subcategory/subcategories ```
    
    Gets the product subcategory list and information of them
    
-* **DELETE** ``` /product-subcategory-api/delete-product-subcategory/{id} ```
+* **DELETE** ``` /product-subcategory/subcategory/{id} ```
 
    Deletes the specified product subcategory
    
-* **PUT** ``` /product-subcategory-api/update-product-subcategory ```
+* **PUT** ``` /product-subcategory/subcategory/ ```
 
   Updates product category. Syntax is below:
   
@@ -218,7 +218,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
   }
   ```
    
-* **POST** ``` /product-subcategory-api/create-product-subcategory ```  
+* **POST** ``` /product-subcategory/subcategory ```  
 
    Creates new product feature detail. Syntax is below:
    
@@ -232,19 +232,19 @@ Swagger is also connected. When project is started, go to this ``` http://localh
    ```
 ### F. SubCategory-Feature-Api   
 
-* **GET** ``` /subcategory-feature-api/subcategory-feature/{id} ```
+* **GET** ``` /subcategory-feature/feature/{id} ```
 
    Get the specified subcategory feature information
    
-* **GET** ``` /subcategory-feature-api/get-subcategory-feature-list ```
+* **GET** ``` /subcategory-feature/features ```
   
      Gets the subcategory feature list and information of them
    
-* **DELETE** ``` /subcategory-feature-api/delete-subcategory-feature/{id} ```
+* **DELETE** ``` /subcategory-feature/feature/{id} ```
 
    Deletes the specified subcategory feature.
    
-* **PUT** ``` /subcategory-feature-api/update-subcategory-feature ```
+* **PUT** ``` /subcategory-feature/feature/ ```
 
   Updates product category. Syntax is below:
   
@@ -258,7 +258,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
   }
   ```
      
-* **POST** ``` /subcategory-feature-api/create-subcategory-feature ```
+* **POST** ``` /subcategory-feature/feature ```
  
     Creates new subcategory feature. Syntax is below:
     
@@ -273,7 +273,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
    
 ## 2. How to save data into the database from the beginning?
 
-### A. **POST** ``` /product-category-api/create-product-category ```
+### A. **POST** ``` /product-category/category ```
 
 Firstly, you have to add a category into the database.
 
@@ -283,7 +283,7 @@ Firstly, you have to add a category into the database.
 }
 ```
 
-### B. **GET** ``` /product-category-api/get-product-category-list ```
+### B. **GET** ``` /product-category/categories ```
 
 To see the list of the categories that you have added and learn their {id}s. When added subcategories to related category, the subcategories that you saw above will enlarge.
 
@@ -297,7 +297,7 @@ To see the list of the categories that you have added and learn their {id}s. Whe
 ]
 ```
 
-### C. **POST** ``` /product-subcategory-api/create-product-subcategory ```
+### C. **POST** ``` /product-subcategory/subcategory ```
 
 Then, you should specify which category that we will add the sub-category under of.
 
@@ -310,7 +310,7 @@ Then, you should specify which category that we will add the sub-category under 
 }
 ```
 
-### D. **GET** ``` /product-subcategory-api/get-product-subcategory-list ```
+### D. **GET** ``` /product-subcategory/subcategories ```
 
 To see the subcategory list and learn the ids of them. Also when added subcategory feature that should be related to subcategory, you will be able to see the subcategory features of any subcategory.
 
@@ -324,7 +324,7 @@ To see the subcategory list and learn the ids of them. Also when added subcatego
 ]
 ```
 
- * When you get request to ``` /product-category-api/get-product-category-list ``` again, you will get;
+ * When you get request to ``` /product-category/categories ``` again, you will get;
  
     ```JS
     {
@@ -342,7 +342,7 @@ To see the subcategory list and learn the ids of them. Also when added subcatego
     
     You should realize that **subcategories** field enlarge after adding information to product subcategory.
 
-### E. **POST** ``` /subcategory-feature-api/create-subcategory-feature ```
+### E. **POST** ``` /subcategory-feature/feature ```
 
 The general features of the added subcategory are added. For instance, if the added subcategory is telephone, then the features of the subcategory that will be added can be the phone's front camera, phone size, etc. In order to add a new feature for a subcategory, you must give the id of that subcategory to indicate which subcategory it belongs to.  
 
@@ -355,7 +355,7 @@ The general features of the added subcategory are added. For instance, if the ad
 }
 ```
 
-### F. **GET** ``` /subcategory-feature-api/get-subcategory-feature-list ```
+### F. **GET** ``` /subcategory-feature/features ```
 
 To see the subcategory feature list and learn the {id}s of them. Also when added product feature detail that should be related to subcategory, you will be able to see the product features of any subcategory.
 
@@ -370,7 +370,7 @@ To see the subcategory feature list and learn the {id}s of them. Also when added
 ```
 
 
- * When you get request to ``` /product-subcategory-api/get-product-subcategory-list ``` again, you will get;
+ * When you get request to ``` /product-subcategory/subcategories ``` again, you will get;
 
    ```JS
    [
@@ -390,7 +390,7 @@ To see the subcategory feature list and learn the {id}s of them. Also when added
    
    You should realize that **subCategoryFeatures** field enlarge after adding information to subcategory feature.
 
-### G. **POST** ``` /product-feature-detail-api/create-product-feature-detail ```
+### G. **POST** ``` /product-feature-detail/detail ```
 
 The features of the products are added under the features of the subcategory. That’s to say, if we follow our case, we have added phone’s front camera to subcategory. Now, specify the feature of front cameras such as 8MP or 12MP… To do this, we must specify the subcategory feature id.
 
@@ -403,7 +403,7 @@ The features of the products are added under the features of the subcategory. Th
 }
 ```
 
-### H. **GET** ``` /product-feature-detail-api/get-product-feature-detail-list ```
+### H. **GET** ``` /product-feature-detail/details ```
    
 To see the product feature detail list and {id}s of product feature details.
 
@@ -416,7 +416,7 @@ To see the product feature detail list and {id}s of product feature details.
 ]
 ```
 
- * When you get request to ``` /subcategory-feature-api/get-subcategory-feature-list ``` again, you will get;
+ * When you get request to ``` /subcategory-feature/features ``` again, you will get;
 
     ```JS
    [
@@ -435,7 +435,7 @@ To see the product feature detail list and {id}s of product feature details.
    
    You should realize that **productFeatureDetails** field enlarge after adding information to product feature detail.
    
-### I. **POST** ``` /product-api/create-product ```
+### I. **POST** ``` /product/product ```
 
 Finally, we can add a product by specifying it’s name, brand, cost, under which category it will, under which subcategory it will and which feature detail it has.
 
@@ -456,7 +456,7 @@ Finally, we can add a product by specifying it’s name, brand, cost, under whic
 }
 ```
 
-### J. **GET** ``` /product-api/get-product-list ```
+### J. **GET** ``` /product/products ```
 
 You can see all the products in a detail as below. 
 

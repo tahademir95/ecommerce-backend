@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-subcategory-api")
+@RequestMapping("/product-subcategory")
 @Tag(name = "Product SubCategory API")
 public class ProductSubCategoryController {
 
@@ -29,7 +29,7 @@ public class ProductSubCategoryController {
 
     @Operation(summary = "Creates new product subcategory", description = "Creates new product subcategory",tags = { "Product SubCategory API" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Product SubCategory created",content = @Content(schema = @Schema(example = " ")))})
-    @PostMapping(value = "/create-product-subcategory", headers = "Accept=application/json")
+    @PostMapping(value = "/subcategory", headers = "Accept=application/json")
     public ResponseEntity<Void> createNewSubCategory(@Parameter(description="Creates new product subcategory here",
                                                                 required=true,
                                                                 schema=@Schema(example = "{\n" +
@@ -41,7 +41,7 @@ public class ProductSubCategoryController {
                                                     )@RequestBody ProductSubCategory subCategory, UriComponentsBuilder ucBuilder) {
         subCategoryService.createSubCategory(subCategory);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/product-subcategory/{id}").buildAndExpand(subCategory.getPsc_id()).toUri());
+        headers.setLocation(ucBuilder.path("/subcategory/{id}").buildAndExpand(subCategory.getPsc_id()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -59,7 +59,7 @@ public class ProductSubCategoryController {
                     "    ]\n" +
                     "}"))),
             @ApiResponse(responseCode = "500", description = "No elements with ID that you have specified",content = @Content(schema = @Schema(example = " ")))})
-    @PutMapping(value="/update-product-subcategory", headers="Accept=application/json")
+    @PutMapping(value="/subcategory/", headers="Accept=application/json")
     public ProductSubCategory updateSubCategory(@Parameter(description="Updates the product feature detail specified by ID", required=true,schema=@Schema(example = "{\n" +
                                                                 "        \"psc_id\": product_subcategory_id,\n" +
                                                                 "        \"subCategoryName\": \"string\",\n" +
@@ -82,7 +82,7 @@ public class ProductSubCategoryController {
 
     @Operation(summary = "Deletes the product subcategory which is specified by id", description = "Deletes product subcategory", tags = { "Product SubCategory API" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",content = @Content(schema = @Schema(example = " ")))})
-    @DeleteMapping(value="/delete-product-subcategory/{id}", headers ="Accept=application/json")
+    @DeleteMapping(value="/subcategory/{id}", headers ="Accept=application/json")
     public ResponseEntity<ProductSubCategory> deleteSubCategory(@Parameter(description = "ID of the product subcategory") @PathVariable("id") int id){
         ProductSubCategory subCategory = subCategoryService.findSubCategoryById(id);
         if (subCategory == null) {
@@ -120,7 +120,7 @@ public class ProductSubCategoryController {
                     "        }\n" +
                     "    ]\n" +
                     "}")))})
-    @GetMapping(value = "/product-subcategory/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/subcategory/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductSubCategory> getSubCategoryById(@Parameter(description = "ID of the product subcategory") @PathVariable("id") int id) {
 
         ProductSubCategory subCategory = subCategoryService.findSubCategoryById(id);
@@ -188,7 +188,7 @@ public class ProductSubCategoryController {
                             "    ]\n" +
                             "}\n" +
                             "]"))) })
-    @GetMapping(value="/get-product-subcategory-list", headers="Accept=application/json")
+    @GetMapping(value="/subcategories", headers="Accept=application/json")
     public List<ProductSubCategory> getAllSubCategories() {
         return subCategoryService.getSubCategoryList();
     }

@@ -34,9 +34,10 @@ public class AuthenticationSettings extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors().and()
+                .httpBasic().and()
                 .csrf().disable().authorizeRequests()
-                .antMatchers("/swagger-ui", "/swagger-ui/index.html?configUrl=/api-docs/swagger-config#/", "/api-docs/").hasRole("auth")
+                .antMatchers("/swagger-ui*", "/api-docs/").hasRole("auth")
+                .antMatchers("/login*", "/register*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin();

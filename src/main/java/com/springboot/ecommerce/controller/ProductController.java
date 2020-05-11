@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/product-api")
+@RequestMapping("/product")
 @Tag(name = "Product API")
 public class ProductController {
 
@@ -30,7 +27,7 @@ public class ProductController {
 
     @Operation(summary = "Creates new product", description = "Creates new product",tags = { "Product" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Product created",content = @Content(schema = @Schema(example = " ")))})
-    @PostMapping(value = "/create-product", headers = "Accept=application/json")
+    @PostMapping(value = "/product", headers = "Accept=application/json")
     public ResponseEntity<Void> createNewProduct(@Parameter(description="Adds a new product. Specify some features of product shown below",
                                                             required=true,
                                                             schema=@Schema(example = "{\n" +
@@ -87,7 +84,7 @@ public class ProductController {
                     "}"))),
             @ApiResponse(responseCode = "500", description = "No elements with ID that you have specified",content = @Content(schema = @Schema(example = " ")))
     })
-    @PutMapping(value="/update-product", headers="Accept=application/json")
+    @PutMapping(value="/product/", headers="Accept=application/json")
     public Product updateProduct(@Parameter(description="Updates the product specified by ID",
                                             required=true,
                                             schema=@Schema(example = "{\n" +
@@ -117,7 +114,7 @@ public class ProductController {
 
     @Operation(summary = "Deletes the product which is specified by id", description = "Deletes product", tags = { "Product" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Deletes Specified Product", content = @Content(schema = @Schema(example = " "))) })
-    @DeleteMapping(value="/delete-product/{id}", headers ="Accept=application/json")
+    @DeleteMapping(value="/product/{id}", headers ="Accept=application/json")
     public ResponseEntity<Product> deleteProduct(@Parameter(description = "ID of the product") @PathVariable("id") int id){
         Product product = productService.findProductById(id);
         if (product == null) {
@@ -230,7 +227,7 @@ public class ProductController {
                     )
             )
     })
-    @GetMapping(value="/get-product-list", headers="Accept=application/json")
+    @GetMapping(value="/products", headers="Accept=application/json")
     public List<Product> getAllProducts() {
         return productService.getProductList();
     }
@@ -265,7 +262,7 @@ public class ProductController {
                     "]"))
             )
     })
-    @GetMapping(value="/get-product-list-in-the-same-subcategory/{psc_id}", headers="Accept=application/json")
+    @GetMapping(value="/products-subcategory/{psc_id}", headers="Accept=application/json")
     public List<Product> getAllProductsInTheSameSubCategory(@Parameter(description = "Id of the product subcategory",required=true) @PathVariable("psc_id") int psc_id,
                                                             @Parameter(description = "Specify the minimum cost of the product") @RequestParam(value = "minCost", required = false, defaultValue = "0") Integer minCost,
                                                             @Parameter(description = "Specify the maximum cost of the product") @RequestParam(value = "maxCost", required = false, defaultValue = "99999") Integer maxCost,
@@ -309,7 +306,7 @@ public class ProductController {
                     "]"))
             )
     })
-    @GetMapping(value="/get-product-list-in-the-same-category/{pc_id}", headers="Accept=application/json")
+    @GetMapping(value="/products-category/{pc_id}", headers="Accept=application/json")
     public List<Product> getAllProductsUnderTheSameCategory(@Parameter(description = "ID of the product category") @PathVariable("pc_id") int pc_id) {
         return (List<Product>) productService.getAllProductsUnderTheSameCategory(pc_id);
     }
@@ -328,7 +325,7 @@ public class ProductController {
                     "]"))
             )
     })
-    @GetMapping(value="/get-brands-and-count-of-brands-product-in-the-same-subcategory/{psc_id}", headers="Accept=application/json")
+    @GetMapping(value="/brands-and-count-subcategory/{psc_id}", headers="Accept=application/json")
     public List<Product> getBrandNamesOfProductsUnderTheSameSubCategory(@Parameter(description = "ID of the product subcategory") @PathVariable("psc_id") int psc_id) {
         return (List<Product>) productService.getBrandNameAndCountOfProductListInTheSameSubcategory(psc_id);
     }
@@ -347,7 +344,7 @@ public class ProductController {
                     "]"))
             )
     })
-    @GetMapping(value="/get-brands-and-count-of-brands-product-in-the-same-category/{pc_id}", headers="Accept=application/json")
+    @GetMapping(value="/brands-and-count-category/{pc_id}", headers="Accept=application/json")
     public List<Product> getBrandNamesOfProductsUnderTheSameCategory(@Parameter(description = "ID of the product category") @PathVariable("pc_id") int pc_id) {
         return (List<Product>) productService.getBrandNameAndCountOfProductListInTheSameCategory(pc_id);
     }

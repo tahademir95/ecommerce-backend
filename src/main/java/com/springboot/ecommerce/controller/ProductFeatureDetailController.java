@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-feature-detail-api")
+@RequestMapping("/product-feature-detail")
 @Tag(name = "Product Feature Detail API")
 public class ProductFeatureDetailController {
 
@@ -29,7 +29,7 @@ public class ProductFeatureDetailController {
 
     @Operation(summary = "Creates new product feature detail", description = "Creates new product feature detail",tags = { "Product Feature Detail API" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Product Feature Detail Created",content = @Content(schema = @Schema(example = " ")))})
-    @PostMapping(value = "/create-product-feature-detail", headers = "Accept=application/json")
+    @PostMapping(value = "/detail", headers = "Accept=application/json")
     public ResponseEntity<Void> createNewProductFeatureDetail(@Parameter(description="Creates new product feature detail here",
                                                                         required=true,
                                                                         schema=@Schema(example = "{\n" +
@@ -41,7 +41,7 @@ public class ProductFeatureDetailController {
                                                              )@RequestBody ProductFeatureDetail productFeatureDetail, UriComponentsBuilder ucBuilder) {
         featureDetailService.createProductFeatureDetail(productFeatureDetail);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/product-product-feature-detail/{id}").buildAndExpand(productFeatureDetail.getPfd_id()).toUri());
+        headers.setLocation(ucBuilder.path("/detail/{id}").buildAndExpand(productFeatureDetail.getPfd_id()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -52,7 +52,7 @@ public class ProductFeatureDetailController {
             "    \"productFeatureDetail\": \"string\"\n" +
             "}"))),
             @ApiResponse(responseCode = "500", description = "No elements with ID that you have specified",content = @Content(schema = @Schema(example = " ")))})
-    @PutMapping(value="/update-product-feature-detail", headers="Accept=application/json")
+    @PutMapping(value="/detail/", headers="Accept=application/json")
     public ProductFeatureDetail updateProductFeatureDetail(@Parameter(description="Updates the product feature detail specified by ID",
                                                                         required=true,schema=@Schema(example = "{\n" +
                                                                                 "    \"pfd_id\":product_feature_detail_id,\n" +
@@ -69,7 +69,7 @@ public class ProductFeatureDetailController {
 
     @Operation(summary = "Deletes the product feature detail which is specified by id", description = "Deletes product feature detail", tags = { "Product Feature Detail API" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(example = " ")))})
-    @DeleteMapping(value="/delete-product-feature-detail/{id}", headers ="Accept=application/json")
+    @DeleteMapping(value="/detail/{id}", headers ="Accept=application/json")
     public ResponseEntity<ProductFeatureDetail> deleteProductFeatureDetail(@Parameter(description = "ID of the product feature detail") @PathVariable("id") int id){
         ProductFeatureDetail featureDetail = featureDetailService.findProductFeatureDetailById(id);
         if (featureDetail == null) {
@@ -86,7 +86,7 @@ public class ProductFeatureDetailController {
                     "    \"productFeatureDetail\": \"string\"\n" +
                     "}"))),
             @ApiResponse(responseCode = "500", description = "No category with this id", content = @Content(schema = @Schema(example = " ")))})
-    @GetMapping(value = "/product-feature-detail/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/detail/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProductFeatureDetail> getProductFeatureDetailById(@Parameter(description = "ID of the product feature detail") @PathVariable("id") int id) {
 
         ProductFeatureDetail featureDetail = featureDetailService.findProductFeatureDetailById(id);
@@ -108,7 +108,7 @@ public class ProductFeatureDetailController {
                             "        \"productFeatureDetail\": \"string\"\n" +
                             "    }\n" +
                             "]"))) })
-    @GetMapping(value="/get-product-feature-detail-list", headers="Accept=application/json")
+    @GetMapping(value="/details", headers="Accept=application/json")
     public List<ProductFeatureDetail> getAllProductFeatureDetails() {
         return featureDetailService.getProductFeatureDetailList();
     }

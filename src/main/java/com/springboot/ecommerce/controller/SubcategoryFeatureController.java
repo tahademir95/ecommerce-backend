@@ -4,7 +4,6 @@ import com.springboot.ecommerce.model.SubCategoryFeature;
 import com.springboot.ecommerce.service.SubCategoryFeatureService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subcategory-feature-api")
+@RequestMapping("/subcategory-feature")
 @Tag(name = "SubCategory Feature API")
 public class SubcategoryFeatureController {
 
@@ -30,7 +29,7 @@ public class SubcategoryFeatureController {
 
     @Operation(summary = "Creates new subcategory feature", description = "Creates new subcategory feature",tags = { "SubCategory Feature API" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Product Category created", content = @Content(schema = @Schema(example = " ")))})
-    @PostMapping(value = "/create-subcategory-feature", headers = "Accept=application/json")
+    @PostMapping(value = "/feature", headers = "Accept=application/json")
     public ResponseEntity<Void> createNewSubCategoryFeature(@Parameter(description="Adds a new category. Just specify name of the category here",
                                                                        required=true,
                                                                        schema=@Schema(example = "{\n" +
@@ -42,7 +41,7 @@ public class SubcategoryFeatureController {
                                                            )@RequestBody SubCategoryFeature feature, UriComponentsBuilder ucBuilder) {
         featureService.createSubCategoryFeature(feature);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/subcategory-feature/{id}").buildAndExpand(feature.getScf_id()).toUri());
+        headers.setLocation(ucBuilder.path("/feature/{id}").buildAndExpand(feature.getScf_id()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -55,7 +54,7 @@ public class SubcategoryFeatureController {
                     "}}"))),
             @ApiResponse(responseCode = "500", description = "No elements with ID that you have specified",content = @Content(schema = @Schema(example = " ")))
     })
-    @PutMapping(value="/update-subcategory-feature", headers="Accept=application/json")
+    @PutMapping(value="/feature/", headers="Accept=application/json")
     public SubCategoryFeature updateSubCategoryFeature(@Parameter(description="Updates the category name specified by ID",
                                                                   required=true,
                                                                   schema=@Schema(example = "{\n" +
@@ -71,7 +70,7 @@ public class SubcategoryFeatureController {
 
     @Operation(summary = "Deletes the subcategory feature which is specified by id", description = "Deletes subcategory feature", tags = { "SubCategory Feature API" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(example = " ")))})
-    @DeleteMapping(value="/delete-subcategory-feature/{id}", headers ="Accept=application/json")
+    @DeleteMapping(value="/feature/{id}", headers ="Accept=application/json")
     public ResponseEntity<SubCategoryFeature> deleteSubCategoryFeature(@Parameter(description = "ID of the subcategory feature")@PathVariable("id") int id){
         SubCategoryFeature subCategoryFeature = featureService.findSubCategoryFeatureById(id);
         if (subCategoryFeature == null) {
@@ -88,7 +87,7 @@ public class SubcategoryFeatureController {
                     "    \"subCategoryFeatureName\": \"string\",\n" +
                     "    \"productFeatureDetails\": []\n" +
                     "}")))})
-    @GetMapping(value = "/subcategory-feature/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/feature/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SubCategoryFeature> getSubCategoryFeatureId(@Parameter(description = "ID of the subcategory feature") @PathVariable("id") int id) {
 
         SubCategoryFeature feature = featureService.findSubCategoryFeatureById(id);
@@ -114,7 +113,7 @@ public class SubcategoryFeatureController {
                             "        ]\n" +
                             "    }\n" +
                             "]")))})
-    @GetMapping(value="/get-subcategory-feature-list", headers="Accept=application/json")
+    @GetMapping(value="/features", headers="Accept=application/json")
     public List<SubCategoryFeature> getAllSubCategoryFeatures() {
         return featureService.getSubCategoryFeatureList();
     }
