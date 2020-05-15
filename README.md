@@ -6,6 +6,8 @@ Now, the capability of the application is the CRUD operation of product, product
 
 Swagger is also connected. When project is started, go to this ``` http://localhost:8080/swagger-ui/ ``` url to see E-Commerce Application API. Swagger UI page is authenticated with JDBC authentication. At first to access swagger ui, the admin should insert a user with username and password -which must be saved as hashed one of the original password for the security- to users table, also insert authority with authority name "auth" and the username that is authenticated to authorities table. Then, any user having auth role in db can access Swagger UI page with his/her username and password.
 
+HATEOAS is implemented. Thanks to the HATEOAS, some extra informations are provided and it says what we can do next. The idea is to embed links within the JSON documents. 
+
 ## Technologies that I have been using;
 -	Spring Boot
 -   Spring Security
@@ -13,6 +15,7 @@ Swagger is also connected. When project is started, go to this ``` http://localh
 -	PostgreSQL
 -	Restful API
 -   Swagger OpenAPI
+-   HATEOAS
 
 ## Table Of Contents
 
@@ -461,26 +464,40 @@ Finally, we can add a product by specifying it’s name, brand, cost, under whic
 You can see all the products in a detail as below. 
 
 ```JS
-[
-   {
-      "p_id":46,
-      "productName": "Galaxy A20",
-      "brandOfProduct": "Samsung",
-      "productFee": 1560,
-      "productCategory": {
-         "pc_id": 42,
-         "categoryName": "Cell Phones & Accessories"
-      },
-      "subCategory": {
-         "psc_id": 43,
-         "subCategoryName": "Cell Phones"
-      },
-      "featureDetails": [
-         {
-            "pfd_id": 45,
-            "productFeatureDetail": "8 MP"
-         }
-      ]
-   }
-]
+{
+    "_embedded": {
+        "products": [
+            {
+                  "p_id":46,
+                  "productName": "Galaxy A20",
+                  "brandOfProduct": "Samsung",
+                  "productFee": 1560,
+                  "productCategory": {
+                     "pc_id": 42,
+                     "categoryName": "Cell Phones & Accessories"
+                  },
+                  "subCategory": {
+                     "psc_id": 43,
+                     "subCategoryName": "Cell Phones"
+                  },
+                  "featureDetails": [
+                     {
+                        "pfd_id": 45,
+                        "productFeatureDetail": "8 MP"
+                     }
+                  ],
+                  "_links": {
+                      "productlist": {
+                          "href": "http://localhost:8080/product/product/46"
+                      }
+                  }
+               }
+        ],
+        "_links": {
+            "self": {
+                "href": "http://localhost:8080/product/products"
+            }
+        }
+    }
+}
 ```

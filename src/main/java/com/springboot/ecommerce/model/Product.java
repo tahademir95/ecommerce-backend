@@ -40,7 +40,7 @@ public class Product {
     @JsonIgnore
     @JsonManagedReference
     @JoinTable(name = "product_feature", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "p_id"),
-               inverseJoinColumns = @JoinColumn(name = "product_feature_detail_temp_id", referencedColumnName = "pfd_id"))
+            inverseJoinColumns = @JoinColumn(name = "product_feature_detail_temp_id", referencedColumnName = "pfd_id"))
     private Set<ProductFeatureDetail> featureDetails;
 
     public int getP_id() {
